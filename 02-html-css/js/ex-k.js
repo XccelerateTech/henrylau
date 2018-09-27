@@ -8,14 +8,24 @@ function matching(input) {
         input.split('').map(num =>{
             temp.push(letter[num]);
         })
-        return temp.join('') 
+        return check(temp)
+        
     }else if(typeof(input) == "number"){
         let temp = [];        
         input.toString().split('').map(digit =>{
             temp.push(letter[digit.charAt()])
         })
-        return temp.join('')
+        return check(temp)
         
+    }else{
+        return "Invalid Input"
     }
 }
 
+function check(checkOutput){
+    if (checkOutput.length > 2 && checkOutput.length < 7) {
+        return checkOutput.join('')
+    }else{
+        return "Invalid Input -- Length"
+    }
+}
