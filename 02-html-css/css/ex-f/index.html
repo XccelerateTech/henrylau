@@ -6,73 +6,74 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EX-F</title>
     <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        header{
+            width: 100%;
+            height: 3em;
+        }
+        header > img{
+            height: 100%;
+            padding: 0 0 10px 80px;
+        }
         #one{
             display: flex;
             justify-content: center;
-            align-content: center;
-            color: #fff;
+            align-items: center;
             position: relative;
-            width: 100%;
             height: 70vh;
             background-image: url("./img/bg.jpg");background-position: center;
             background-repeat: no-repeat;
             background-size: cover; 
-            z-index: -2;
         }
-        #one::after{
-            content: "";
-            display: block;
+        #darken{
             position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0,0,0,0.5);
-            z-index: -1
         }
         #inside{
             display: flex;
-            align-content: center;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            width:400px;
+            z-index: 5;
         }
-        #inside>h1{
-            margin: auto 0 10px 0
-        }
-        button{
-            background-color: Chartreuse;
-            /* padding: 5px; */
-            border-radius: 20%;
-            margin: 0 0 auto 0;
+        #inside > h1{
             color: #fff;
+            font-size: 40px;
+        }
+        #inside > button{
+            background-color: Chartreuse;
+            border-radius: 22px;
+            color: #fff;
+            font-size: 30px;
+            height: 50px;
+            width: 170px;
         }
         #two{
             display: flex;
             justify-content: center;
             align-content: center;
+            flex-wrap: wrap;
             padding: 20px;
             background-color: LightGreen ;
         }
-        .row{
-            height: 50%;
-        }
         .content{
-            /* display: flex;
-            align-content: center; */
-            display: inline-block;
-            width: 47%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40%;
         }
-        .content > img{
-            width:15%;
-            display: inline-block;
+        .content img{
+            height: 80%;
         }
         .content > p{
-            display: inline-block;
-            width: 65%;
+            width: 50%;
             margin: 10px;
-            text-align: center;
-            vertical-align: middle;
         }
     </style>
 </head>
@@ -81,33 +82,28 @@
         <img src="./img/logo.png" alt="">
     </header>
     <div id="one">
+        <div id="darken"></div>
         <div id="inside">
             <h1>Beautiful Flowers</h1>
             <button>Learn more</button>
         </div>
     </div>
     <div id="two">
-        <div id="in4">
-            <div class="row">
-                <div class="content">
-                    <img src="img/flower.png" alt="">
-                    <p>Flowers for every kind of situation</p>
-                </div>
-                <div class="content">
-                    <img src="img/pay.png" alt="">
-                    <p>All major payments kinds accepted</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="content">
-                    <img src="img/phone.png" alt="">
-                    <p>Free consulation</p>
-                </div>
-                <div class="content">
-                    <img src="img/car.png" alt="">
-                    <p>City wide delivery</p>
-                </div>
-            </div>
+        <div class="content">
+            <img src="img/flower.png" alt="">
+            <p>Flowers for every kind of situation</p>
+        </div>
+        <div class="content">
+            <img src="img/pay.png" alt="">
+            <p>All major payments kinds accepted</p>
+        </div>
+        <div class="content">
+            <img src="img/phone.png" alt="">
+            <p>Free consulation</p>
+        </div>
+        <div class="content">
+            <img src="img/car.png" alt="">
+            <p>City wide delivery</p>
         </div>
     </div>
 </body>
