@@ -17,13 +17,13 @@
 <body data-spy="scroll" data-target=".navbar" data-offset="0">
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand" href="#"><i class="far fa-angry"></i></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navToggle" aria-controls="navToggle"
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navToggle" aria-controls="#navToggle"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse">
-            <div class="navbar-nav  ml-auto" id="navToggle">
-                <a class="nav-item active nav-link" href="#about">About</a>
+        <div class="collapse navbar-collapse" id="navToggle">
+            <div class="navbar-nav  ml-auto">
+                <a class="nav-item nav-link" href="#about">About</a>
                 <a class="nav-item nav-link" href="#icons">Four Icons</a>
                 <a class="nav-item nav-link" href="#photos">Photo</a>
                 <a class="nav-item nav-link" href="#contact">Contact</a>
@@ -148,7 +148,7 @@
                 target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
                 if (target.length) {
                     $('html,body').animate({
-                        scrollTop: target.offset().top - navH //offsets for fixed header
+                        scrollTop: target.offset().top - 50 //offsets for fixed header
                     }, 1000);
                     return false;
                 }
