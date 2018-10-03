@@ -1,36 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="a.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <title>Bootstrap Layout</title>
 </head>
-<body>
-    <nav class="navbar sticky-top sticky-offset navbar-expand-lg navbar-dark bg-dark justify-content-between">
+
+<body data-spy="scroll" data-target=".navbar" data-offset="0">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand" href="#"><i class="far fa-angry"></i></a>
-        <div class="navbar-nav">
-            <a class="nav-item active nav-link" href="#about">About</a>
-            <a class="nav-item nav-link" href="#icons">Four Icons</a>
-            <a class="nav-item nav-link" href="#photos">Photo</a>
-            <a class="nav-item nav-link" href="#contact">Contact</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navToggle" aria-controls="navToggle"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+            <div class="navbar-nav  ml-auto" id="navToggle">
+                <a class="nav-item active nav-link" href="#about">About</a>
+                <a class="nav-item nav-link" href="#icons">Four Icons</a>
+                <a class="nav-item nav-link" href="#photos">Photo</a>
+                <a class="nav-item nav-link" href="#contact">Contact</a>
+            </div>
         </div>
     </nav>
     <section class="jumbotron">
         <div id="overlay"></div>
         <div id="inside">
             <h1>BIG Hero Banner</h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio commodi, hic doloremque ducimus eveniet quos placeat incidunt ratione quas deserunt obcaecati praesentium accusantium quisquam neque illum nulla dignissimos totam dolores?</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio commodi, hic doloremque ducimus eveniet
+                quos placeat incidunt ratione quas deserunt obcaecati praesentium accusantium quisquam neque illum
+                nulla dignissimos totam dolores?</p>
             <button>For More Detail</button>
         </div>
     </section>
     <section id="about">
         <div id="inside">
             <h1>Let me tell you something !!!!</h1>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur ducimus, officia assumenda mollitia, ad commodi facilis earum eum voluptatum eos quos vitae explicabo autem dolor nemo maxime quas ex nobis!</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur ducimus, officia assumenda mollitia,
+                ad commodi facilis earum eum voluptatum eos quos vitae explicabo autem dolor nemo maxime quas ex nobis!</p>
             <button>Want More</button>
         </div>
     </section>
@@ -69,16 +83,24 @@
     </section>
     <section id="photos">
         <div class="photo col-xl-3 col-md-6 col-sm-12">
-            <img src="https://images.pexels.com/photos/5358/sea-beach-holiday-vacation.jpg?auto=compress&cs=tinysrgb&w=940" class="img-fluid" alt="Responsive image">
+            <img src="https://images.pexels.com/photos/5358/sea-beach-holiday-vacation.jpg?auto=compress&cs=tinysrgb&w=940"
+                class="img-fluid" alt="Responsive image">
+            <h1>What</h1>
         </div>
         <div class="photo col-xl-3 col-md-6 col-sm-12">
-            <img src="https://images.pexels.com/photos/223022/pexels-photo-223022.jpeg?auto=compress&cs=tinysrgb&w=940" class="img-fluid" alt="Responsive image">
+            <img src="https://images.pexels.com/photos/223022/pexels-photo-223022.jpeg?auto=compress&cs=tinysrgb&w=940"
+                class="img-fluid" alt="Responsive image">
+            <h1>Do</h1>
         </div>
         <div class="photo col-xl-3 col-md-6 col-sm-12">
-            <img src="https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg?auto=compress&cs=tinysrgb&w=940" class="img-fluid" alt="Responsive image">
+            <img src="https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg?auto=compress&cs=tinysrgb&w=940"
+                class="img-fluid" alt="Responsive image">
+            <h1>U</h1>
         </div>
         <div class="photo col-xl-3 col-md-6 col-sm-12">
-            <img src="https://images.pexels.com/photos/380283/pexels-photo-380283.jpeg?auto=compress&cs=tinysrgb&w=940" class="img-fluid" alt="Responsive image">
+            <img src="https://images.pexels.com/photos/380283/pexels-photo-380283.jpeg?auto=compress&cs=tinysrgb&w=940"
+                class="img-fluid" alt="Responsive image">
+            <h1>SEE</h1>
         </div>
     </section>
     <section id="afterP">
@@ -90,13 +112,15 @@
     <section id="contact">
         <div id="inside">
             <h1>Contact Me as U Wish</h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel vitae sapiente magni corrupti in perspiciatis possimus id corporis ex itaque? Quae ducimus voluptatum corporis facilis assumenda. Magnam quis dolorum alias?</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel vitae sapiente magni corrupti in
+                perspiciatis possimus id corporis ex itaque? Quae ducimus voluptatum corporis facilis assumenda. Magnam
+                quis dolorum alias?</p>
             <div id="nums">
-                <div id="phone">
+                <div id="phone col-xl-6 col-md-6 col-sm-12">
                     <i class="fas fa-phone"></i>
                     <p>9999-9999</p>
                 </div>
-                <div id="email">
+                <div id="email col-xl-6 col-md-6 col-sm-12">
                     <i class="far fa-envelope"></i>
                     <p>suck@my.dick</p>
                 </div>
@@ -104,7 +128,56 @@
         </div>
     </section>
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@14/dist/smooth-scroll.polyfills.min.js"></script>
+<script>
+    var scroll = new SmoothScroll('a[href*="#"]');
+    var navH = $(".navbar").outerHeight();
+    $("body").attr("data-offset", navH);
+    $(function () {
+        $('a[href*="#"]:not([href="#"])').click(function () {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+                && location.hostname == this.hostname) {
+
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top - navH //offsets for fixed header
+                    }, 1000);
+                    return false;
+                }
+            }
+        });
+    });
+    $(document).ready(function () {
+        $(window).scroll(function () { 
+            if ($(document).scrollTop() < navH) { 
+                $('.navbar').css('opacity', "0.45");
+            } else if ($(document).scrollTop() > navH) {  
+                $('.navbar').css('opacity', "1")
+            }
+        });
+    });
+    var animation = [
+        "headShake",
+        "bounceIn",
+        "flash",
+        "rotateOut",
+        "slideInRight",
+        "pulse",
+        "rollIn"
+    ]
+    $("i").each(function () {
+        $(this).addClass("animated infinite " + animation[Math.round(Math.random() * 6)] + " delay-2s ")
+    })
+    $("i").first().removeClass("animated")
+
+</script>
+
 </html>
