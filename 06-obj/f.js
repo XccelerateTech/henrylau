@@ -1,3 +1,5 @@
+const char = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+
 function transform(input) {
     if (typeof(input) === "number") {
         let len =  input.toString().split('')
@@ -9,15 +11,13 @@ function transform(input) {
 }
 function word(input, output) {
     let temp = [];
-        let word = [];
-        for (i in output){
-            temp[i] = parseInt(input %10) + 96;
-            input /=10 ;
-        }
-        temp.sort((a,b) => a-b).map(char =>{
-            word.push(String.fromCharCode(char))
-        });   
-        return word.join('');  
+    let word = [];
+    for (i in output){
+        temp[i] = parseInt(input %10)
+        input /=10 ;
+    }
+    temp.sort().map(charIndex =>{word.push(char[charIndex-1])});   
+    return word.join('');  
 }
 
-console.log(transform(312));
+console.log(transform("312"));
