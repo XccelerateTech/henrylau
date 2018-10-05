@@ -56,31 +56,18 @@ class Bird {
 }
 
 var bat = new Bat();
-
 bat.batFly.fly();
-
 bat.batFeed.feed();
 
-
-
 var fish = new Fish();
-
 fish.fishSwim.swim();
-
 fish.fishReproduce.lay();
 
 
-
 var whale = new Whale();
-
 whale.whaleSwimm.swim();
-
 whale.whaleFeed.feed();
 
-
-
 var bird = new Bird();
-
 bird.birdFly.fly();
-
 bird.birdReproduce.lay();
