@@ -28,11 +28,12 @@ function Casino(gamers) {
     
 }
 function gameStart(list) {
-    if (players.length - 1 > losers.length ) {
+    if (players.length > 1 ) {
         Casino(list)
         list.filter(zero => zero.out() === true).map(gg => losers.push(gg.name))
         players = list.filter(inGame => inGame.out() === false)
     }
+    return console.log(`${players[0].name} win and earn ${players[0].cash}`)
 }
 let tommy = new Gambler("tommy", 1);
 let rick = new Gambler("rick", 1);
