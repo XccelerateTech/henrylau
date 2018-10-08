@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EX-B</title>
+</head>
+<body>
+    <h1>EX-B</h1>
+</body>
+<script>
+    function requesting(endPoint, value) {
+        let http = new XMLHttpRequest();
+        http.open('GET', `https://restcountries.eu/rest/v2/${endPoint}/${value}`);
+        http.send();
+        http.onreadystatechange = () =>{
+            if (http.readyState != 4) {
+                return;
+            }else if(http.status == 200){
+                
+                let recieve = JSON.parse(http.responseText)
+                return log(recieve[0].name);
+            }else {
+                console.log('error occurred' + http.status);
+                }
+        }
+    }
+    // function inforMe(endPoint, value, cb) {
+    //     let data = requesting(endPoint, value);
+    //     cb(data)
+    // }
+    function log(input) {
+        return console.log(input);
+    }
+    requesting("capital", "paris")
+</script>
+</html>

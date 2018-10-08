@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EX-c</title>
+</head>
+<body>
+    <h1>EX-C</h1>
+</body>
+<script>
+    let http = new XMLHttpRequest();
+
+    http.open('GET', 'http://api.open-notify.org/astros.json');
+    http.send();
+    http.onreadystatechange = () =>{
+        if (http.readyState != 4) {
+            return;
+        }else if(http.status == 200){
+            let stuff = JSON.parse(http.responseText)
+            show(stuff);
+        }else {
+            console.log('error occurred' + http.status);
+        }
+    }
+
+    function show(input) {
+        for (let i = 0; i < input.people.length; i++) {
+            console.log(input.people[i].name);
+        }
+    }
+</script>
+</html>

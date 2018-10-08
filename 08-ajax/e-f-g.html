@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EX-E</title>
+</head>
+<body>
+    <h1>My Homepage</h1>
+        <div class="content-section">
+            <p>
+                I'm a paragraph
+            </p>
+        </div>
+        <div class="content-section">
+            <h3>Section Heading</h3>
+            <p>
+                Another paragraph
+            </p>
+            <div id="info-field">
+                <p>
+                    some info
+                </p>
+            </div>
+        </div>
+</body>
+<script>
+    let result = document.getElementById('info-field').getElementsByTagName("p")[0].innerText
+    // console.log(result);
+
+    function className(input) {
+        let output = document.getElementsByClassName(input);
+        let inside = Object.values(output)
+        inside.map(data =>{
+            console.log(data.innerText)
+        })
+    }
+    // className("content-section") 
+
+    function ID (input){
+        let output = document.getElementById(input);
+        while (output.firstChild) {
+            output.removeChild(output.firstChild);
+        }
+    }
+    // ID("info-field") 
+</script>
+</html>

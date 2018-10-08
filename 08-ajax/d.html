@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EX-D</title>
+</head>
+<body>
+    <h1>EX-D</h1>
+</body>
+<script>
+    class User {
+        constructor(listOfInfo){
+            this.firstName = listOfInfo.firstName;
+            this.lastName = listOfInfo.lastName;
+            this.email = listOfInfo.email;
+            this.birth = listOfInfo.birth;
+        }
+    }
+    function requesting(peoplesUWant){
+        let http = new XMLHttpRequest();
+        
+        http.open('GET', `https://randomuser.me/api/?results=${peoplesUWant}`);
+        http.send();
+        
+        http.onreadystatechange = () =>{
+            if (http.readyState != 4) {
+                return;
+            }else if(http.status == 200){
+                return show(JSON.parse(http.responseText))
+            }else {
+                console.log('error occurred' + http.status);
+            }
+        }
+}
+    function show(input) {
+        input.results.map(data =>{
+            let info = {
+                firstName:data.name.first,
+                lastName:data.name.last,
+                email:data.email,
+                birth:data.dob.date
+            }
+            users.push(new User(info))
+        })
+    }
+    let users = []
+    requesting(17);
+    // console.log(users);
+</script>
+</html>
