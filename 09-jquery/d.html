@@ -71,10 +71,8 @@
         <td>peter@gmail.com</td>
     </tr>`)
 
-    $('form').append(`
-    <div id="row-clear">
-        <input type="submit" value="clear" />
-    </div>
+    $('#row-submit').append(`
+        <input type="reset" value="clear" />
     `)
 
     $('title').text('Henry\'s contact list appliction')
@@ -100,14 +98,7 @@
             name.css('border-color', 'black')
         }
     })
-
-    let clear = $('input[value="clear"]')
-    clear.keypress(()=>{
-        phone.val() = '';
-        name.val() = '';
-        $('input[name="email"]').val() = '';
-    })
-
+    
     $('#content').append(`
         <section>
             <h1>Update List</h1>
