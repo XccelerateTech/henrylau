@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JQuery selector</title>
+</head>
+
+<body>
+    <header id='header'>
+        <h1>Contacts</h1>
+    </header>
+    <div id="content">
+        <section class="sections" id="new-contact">
+            <h1>Create New Contact</h1>
+            <form id="form1">
+                <div id="row-name">
+                    <input type='text' name="name" placeholder="Name" />
+                </div>
+                <div id="row-phone">
+                    <input type='text' name="phone" placeholder="Telephone Number" />
+                </div>
+                <div id="row-email">
+                    <input type='text' name="email" placeholder="Email" />
+                </div>
+                <div id="row-submit">
+                    <input type="submit" value="submit" />
+                </div>
+            </form>
+        </section>
+        <section class="sections" id="contact-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Telephone Number</th>
+                        <th>email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row">
+                        <td>Sam</td>
+                        <td>123456789</td>
+                        <td>sam@gmail.com</td>
+                    </tr>
+                    <tr class="row">
+                        <td>Tom</td>
+                        <td>987654321</td>
+                        <td>tom@gmail.com</td>
+                    </tr>
+                    <tr class="row">
+                        <td>Nadim</td>
+                        <td>54678292</td>
+                        <td>nadim@gmail.com</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+    <footer>
+    </footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+<script>
+    let phoneNum = $('input[name*="phone"]')[0]
+    let contact = $('.row')[1]
+    let allSection = $('section') // object
+    let inputField = $('input[placeholder]')
+    // console.log(inputField);
+</script>
+
+</html>
