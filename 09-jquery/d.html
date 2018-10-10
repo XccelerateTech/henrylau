@@ -75,18 +75,18 @@
         <input type="reset" value="clear" />
     `)
 
-    $('title').text('Henry\'s contact list appliction')
+    $('#header h1').text('Henry\'s contact list appliction')
 
     $('#contact-list').css('color', 'pink')
     
     // D Exercise Below
-
-    let phone = $('input[name="phone"]')
-    phone.keyup(() =>{
-        if (phone.val().length < 5 || phone.val().length > 16) {
-            phone.css('border-color', 'red')
+    $('input[name="phone"]').keyup((e) =>{
+        let thiss = e.target;
+        let len = String(thiss.value).length
+        if (len < 5 || len > 16) {
+            $(thiss).css('border-color', 'red')
         }else{
-            phone.css('border-color', 'black')
+            $(thiss).css('border-color', 'black')
         }
     })
     
@@ -99,8 +99,20 @@
         }
     })
     
+    $('#new-contact').submit((e) =>{
+        e.preventDefault();
+        let thiss = e.target;
+        $('tbody').append(`
+            <tr class="row">
+                <td>${thiss.name.value}</td>
+                <td>${thiss.phone.value}</td>
+                <td>${thiss.email.value}</td>
+            </tr>
+        `);
+        $('input[value="clear"]').click();
+    })
     $('#content').append(`
-        <section>
+        <section id="updateForm">
             <h1>Update List</h1>
             <form id="form2">
                 <div id="row-name2">
@@ -136,13 +148,20 @@
             name2.css('border-color', 'black')
         }
     })
-    let input2 = $('.row').children();
-    input2.click(()=>{
-        phone2.val(input2[1].textContent)
-        name2.val(input2[0].textContent) 
-        $('input[name="email2"]').val(input2[2].textContent) 
+    let current;
+    $('tbody').click((e)=>{
+        let rowClick = current = e.target.parentElement.children;
+        phone2.val(rowClick[1].textContent)
+        name2.val(rowClick[0].textContent) 
+        $('input[name="email2"]').val(rowClick[2].textContent) 
     })
-    $('#row-submit2').click(()=>{
+    $('#updateForm').submit((e)=>{
+        e.preventDefault();
+        let thiss = e.target;
+        $(current[0]).text(name2.val())
+        $(current[1]).text(phone2.val())
+        $(current[2]).text($('input[name="email2"]').val())
+        
         alert(`
         Name : ${name2.val()}
         Phone : ${phone2.val()}
