@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ex-e-f</title>
+    <style>
+        .display{
+            height: 40vh;
+            text-align: center;
+        }
+        .flex{
+            display: flex;
+        }
+        section{
+            margin: auto ;
+            width: 33.3%;
+            height: 100px;
+            text-transform: uppercase;
+        }
+        #yesterday{
+            background: #aaa;
+            color: white;
+        }
+        #today{
+            background: #777;
+            color: white;
+        }
+        #tomorrow{
+            background: #333;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="form">
+        <input type="text" name="long" placeholder="longtitude " >
+        <input type="text" name="lat" placeholder="latitude " >
+        <input type="submit" value="Show UP">
+        <input type="submit" name="check" value="Day Length Compare 2 HK">
+    </form>
+    <div class="display" id="sunrise">
+        <h1>SunRise</h1>
+        <div class="flex">
+            <section id="yesterday"></section>
+            <section id="today"></section>
+            <section id="tomorrow"></section>
+        </div>
+    </div>
+    <div class="display" id="sunset">
+        <h1>SunSet</h1>
+        <div class="flex">
+            <section id="yesterday"></section>
+            <section id="today"></section>
+            <section id="tomorrow"></section>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+<script>
+    // EX E
+    $('#form').submit((e) => {
+        e.preventDefault();
+        let long = $('input[name="long"]').val()
+        let lat = $('input[name="lat"]').val()
+        compare(long,lat, "yesterday", "sunset")
+        compare(long,lat, "tomorrow", "sunset")
+        compare(long,lat, "yesterday", "sunrise")
+        compare(long,lat, "tomorrow", "sunrise")
+    })
+    function render(input, date, type) {
+        $(`#${type} #${date}` ).html(`
+        <h3>${date} - ${type}</h3>
+        <span>${input}</span>
+        `)
+    }
+    function renderNow(input, type){
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+        let diff = new Date(input);
+        var days = diff.getDay();
+        var hrs = diff.getHours();
+        var mnts = diff.getMinutes();
+        var sec = diff.getSeconds();
+        
+        let a =  `${addZero(hrs)} : ${addZero(mnts)} : ${addZero(sec)}`
+        render(a, "today",type)
+    }
+    function compare(long, lat, date, type) {
+        let today = $.get(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${long}&date=today&formatted=0`
+        )
+        let otherDay = $.get(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${long}&date=${date}&formatted=0`
+        )
+        
+        let comp = $.when(today, otherDay);
+        comp.done((today, otherday) => {
+            let todaySun = today[0].results[`${type}`];
+            let otherSun = otherday[0].results[`${type}`]
+            renderNow(todaySun, type)
+            if (date === "yesterday" ) {
+                render(diff(todaySun, otherSun), date, type)
+            }else{
+                render(diff(otherSun, todaySun), date, type)
+            }
+        }).fail(err => {
+            console.log('Something Went Wrong##' + err);
+        }).always(() => {
+            console.log('AJAX Work Perfectly!!!!');
+        })
+    }
+    
+    function diff(t1, t2) {
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+        let diff = Math.abs(new Date(t1) - new Date(t2)) /1000;
+        var days = Math.floor(diff / (3600 * 24));
+        diff -= days * 3600 * 24;
+        var hrs = Math.floor(diff / 3600);
+        diff -= hrs * 3600;
+        var mnts = Math.floor(diff / 60);
+        diff -= mnts * 60;
+        
+        let a =  `${addZero(days)} days - ${addZero(hrs)} : ${addZero(mnts)} : ${addZero(diff)}`
+        return a
+    }
+
+    // EX F
+    $('input[name="check"]').click((e)=>{
+        e.preventDefault();
+        let long = $('input[name="long"]').val()
+        let lat = $('input[name="lat"]').val()
+        let companion = $.get(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${long}&date=today&formatted=0`)
+        let hk = $.get(`https://api.sunrise-sunset.org/json?lat=22.28552&lng=114.15769&date=today&formatted=0`)
+
+        let comp = $.when(companion, hk);
+        comp.done((companion, hk) => {
+            let a = companion[0].results.day_length;
+            let b = hk[0].results.day_length;
+            if (a > b) {
+                alert('More Daylight to HK!!')
+            }else{
+                alert('Less Daylight to HK!!')
+            }
+        }).fail(err => {
+            console.log('Something Went Wrong##' + err);
+        }).always(() => {
+            console.log('AJAX Work Perfectly!!!!');
+        })
+    })
+</script>
+
+</html>

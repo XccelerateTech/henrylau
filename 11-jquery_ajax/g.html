@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EX - g</title>
+</head>
+<body>
+    <form id="form">
+        <input type="text" name="a" placeholder="Country A " value="japan" >
+        <input type="text" name="b" placeholder="Country B " value='german'>
+        <input type="submit" value="VS">
+    </form>
+    <section id="output">
+        <p id="set"></p>
+        <p id="rise"></p>
+    </section>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+<script>
+    $("#form").submit((e)=>{
+        e.preventDefault();
+        let a = $('input[name="a"]').val();
+        let b = $('input[name="b"]').val();
+        console.log(a,b);
+        
+        let countryA = $.get(`https://restcountries.eu/rest/v2/name/${a}`)
+        let countryB = $.get(`https://restcountries.eu/rest/v2/name/${b}`)
+
+        let combined1 = $.when(countryA, countryB).done((a, b)=>{
+            let aData = a[0][0]
+            let bData = b[0][0]
+            sun(aData, bData)
+        })
+    })
+    function sun(a, b) {
+        let aSun = $.get(`https://api.sunrise-sunset.org/json?lat=${a.latlng[0]}&lng=${a.latlng[1]}&date=today&formatted=0`)
+        let bSun = $.get(`https://api.sunrise-sunset.org/json?lat=${b.latlng[0]}&lng=${b.latlng[1]}&date=today&formatted=0`)
+
+        let combined2 = $.when(aSun, bSun).done((a,b)=>{
+            sunrise(a[0].results.sunrise,b[0].results.sunrise);
+            sunset(a[0].results.sunset,b[0].results.sunset)
+        })
+    }
+    function sunrise(a, b) {
+        let aSec = new Date(a).getTime();
+        let bSec = new Date(b).getTime();
+        if (aSec > bSec) {
+            $('#rise').html(`
+                Sunrise of country 1 is later than country 2 by - ${diff(a, b)}
+            `)
+        }else{
+            $('#rise').html(`
+                Sunrise of country 1 is earlier than country 2 by - ${diff(b, a)}
+            `)
+        }
+    }
+    function sunset(a, b) {
+        let aSec = new Date(a).getTime();
+        let bSec = new Date(b).getTime();
+        if (aSec > bSec) {
+            $('#set').html(`
+                Sunset of country 1 is later than country 2 by - ${diff(a, b)}
+            `)
+        }else{
+            $('#set').html(`
+                Sunset of country 1 is earlier than country 2 by - ${diff(b, a)}
+            `)
+        }
+    }
+    function diff(t1, t2) {
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+        let diff = Math.abs(new Date(t1) - new Date(t2)) /1000;
+        var days = Math.floor(diff / (3600 * 24));
+        diff -= days * 3600 * 24;
+        var hrs = Math.floor(diff / 3600);
+        diff -= hrs * 3600;
+        var mnts = Math.floor(diff / 60);
+        diff -= mnts * 60;
+        
+        let a =  `${addZero(hrs)} : ${addZero(mnts)} : ${addZero(diff)}`
+        return a
+    }
+</script>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EX-d</title>
+</head>
+
+<body>
+    <form id="form">
+        <input type="text" name="long" placeholder="longtitude " value="114.15769">
+        <input type="text" name="lat" placeholder="latitude " value="22.28552">
+        <input type="submit" value="Show UP">
+    </form>
+    <div id="show"></div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+<script>
+
+    $('#form').submit((e) => {
+        e.preventDefault();
+        let long = $('input[name="long"]').val()
+        let lat = $('input[name="lat"]').val()
+        sunTime(long, lat)
+    })
+    function sunTime(long, lat) {
+        $.get(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${long}&formatted=0`
+        ).done(data => {
+            timeHandling(data);
+        }).fail(err => {
+            console.log('Something Went Wrong##' + err);
+        }).always(() => {
+            console.log('AJAX Work Perfectly!!!!');
+        })
+    }
+    function timeHandling(time) {
+        let sunRise = new Date(time.results.sunrise)
+        let sunSet = new Date(time.results.sunset)
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+        $('#show').html(`
+            <p>Sunrise time You are looking for - correspond to HK -- <span>${addZero(sunRise.getHours())} : ${addZero(sunRise.getMinutes())}</span></p>
+            <p>Sunset time You are looking for - correspond to HK -- <span>${addZero(sunSet.getHours())} : ${addZero(sunSet.getMinutes())}</span></p>
+        `)
+    }
+</script>
+</html>
