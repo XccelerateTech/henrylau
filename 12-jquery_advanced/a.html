@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tic Tac Toe</title>
+    <style>
+        body{
+            margin: 0;padding: 0;
+        }
+        .container{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .wrapper{
+            display: flex;
+            flex-wrap: wrap;
+            width: 500px;
+            height: 500px;
+        }
+        .box{
+            border: 1px black solid;
+            width: 30%;
+        }
+        #clear{
+            font-size: 1.5em;
+            padding: 0.5em;
+            margin: 1.5em;
+        }
+        .player1{
+            background: pink;
+        }
+        .player2{
+            background: red;
+        }
+        #winner{
+            font-size: 1.5em;
+            height: 0.5em;
+            padding: 0.5em;
+            margin: .5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+        </div>
+        <div id="winner"></div>
+        <button id="clear">reset</button>
+    </div>
+</body>
+<script>
+    let round = 0;
+    let boxes = document.querySelectorAll('.box')
+    Array.from(boxes).forEach(box =>{
+        box.addEventListener('click', (e)=>{
+            if (round%2 == 0 && e.target.classList.length < 3) {
+                e.target.className += ' ' + 'player1'
+            }else if(round%2 == 1 && e.target.classList.length < 3){
+                e.target.className += ' ' + 'player2'
+            }
+            colCheck()
+            rowCheck()
+            crossCheck()
+            round++;
+        })
+    })
+    document.getElementById('clear').addEventListener('click', e =>{
+        Array.from(boxes).forEach(box =>{
+            box.classList.remove('player1')
+            box.classList.remove('player2')
+        })
+        document.getElementById('winner').innerText = '';
+        round = 0
+    })
+    function winner(input) {
+        document.getElementById('winner').innerText = ` Winner Goes to ${input}`;
+    }
+    function colCheck(){
+        for (let i = 0; i < 3; i++) {
+            let a = boxes[i].classList[1] 
+            let b = boxes[i+3].classList[1] 
+            let c = boxes[i+6].classList[1]
+            if (a!=undefined && a == b && b ==c) {
+                return winner(`${boxes[i].classList[1]}`)
+            }
+        }
+    }
+    function rowCheck(){
+        for (let i = 0; i < 9; i++) {
+            if(i%3 == 0){
+                let a = boxes[i].classList[1] 
+                let b = boxes[i+1].classList[1] 
+                let c = boxes[i+2].classList[1]
+                if ( a!=undefined && a == b && b == c) {
+                    return winner(`${boxes[i].classList[1]}`)
+                }
+            }
+        }
+    }
+    function crossCheck(){
+        if (
+            boxes[4].classList[1] != undefined &&
+            boxes[0].classList[1] ==
+            boxes[8].classList[1] &&
+            boxes[4].classList[1] ==
+            boxes[8].classList[1] 
+        ) {
+            return winner(`${boxes[0].classList[1]}`)
+            
+        }else if(
+            boxes[4].classList[1] != undefined &&
+            boxes[2].classList[1] ==
+            boxes[6].classList[1] &&
+            boxes[4].classList[1] ==
+            boxes[6].classList[1] 
+        ){
+            return winner(`${boxes[2].classList[1]}`)
+        }
+    }
+</script>
+</html>
