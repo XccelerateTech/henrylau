@@ -1,0 +1,133 @@
+Q1
+    a) <div> is a basic element under HTML, it      provide a block scope for its child element.
+
+    b) <ul> is a un-order list.
+
+    c) <td> is a cell block under <table> element.
+
+    d) <thead> is a header for a <table> element.
+
+    e) <section> is same as <div>, only the naming is different. It is design for more human readable.
+
+    f) <img> is a tag for image that create a inline element.
+
+    g) <form> create a form element that provide a scope for form input stuff.
+
+    h) <label> a element under <form> to indicate title.
+
+    i) <input> a element under <form> to provide a field for user input.
+
+    j) <option> a element under <select> to provide choices to place.
+
+Q2 
+    a) cm : centimeter (Absolute length)
+
+    b) em : font-size depend on parent element (relative length)
+
+    c) in : inches (Absolute length)
+
+    d) mm : millimeters (Absolute length)
+
+    e) px : pixels (Absolute length)
+
+    f) vh : viewport height for browser (relative length)
+
+    g) vw : viewport width for browser (relative length)
+
+    h) rem : font-size dependent on root default setting (relative length)
+
+    i) % : percentage of length depend on parent element
+
+Q3
+    "this" keyword refering the object instance that the property using "this" who belongs to.
+
+Q4 
+    function is a block for code's action.
+
+Q5 
+    function BMI (height, weight){
+        return weight / ((height /100) **2)
+    }
+
+Q6 
+    Access the number of 6-series cars sold
+    => car.brands.BMW.["6-series"].sold 
+
+    Access the number of Model-A cars sold
+    => car.brands.Tesla["Model-A"].sold
+
+Q7 
+    let nameArr = []
+    restaurants.filter(data => data.group == "Castelo Concepts").map(data2 => nameArr.push(data2.name))
+
+Q8
+    class Pet {
+        constructor(name, age = 4){
+            this.name = name;
+            this.age = age
+        }
+        get Age(){
+            return `I'm ${this.age} year's old`
+        }
+        set Age(yrs){
+            this.age = yrs
+        }
+        get Info(){
+            return `My name is ${this.name}, I am ${this.age} old`
+        }
+    }
+
+    const pet = new Pet(given name, 4)
+
+Q9
+    $('#theButton').on('click', ()=>{
+       $.get("https://randomuser.me/api/", info =>{
+           $('#textField').html(`User Info : ${info.results[0].name.first}, {info.results[0].name.last}`)
+       })
+    })
+
+Q10
+    $('#theButton').on('click', ()=>{
+         let friendA = $.get('https://randomuser.me/api/')
+        let friendB = $.get('https://randomuser.me/api/')
+
+        let combined1 = $.when(friendA, friendA).done((a, b)=>{
+            dataFormatter(JSON.parse(a.results))
+            dataFormatter(JSON.parse(b.results))
+        })
+    })
+
+    function dataFormatter(info){
+        let result ={
+            firstName:info.name.first,
+            lastName:info.name.last,
+            location:{
+                lat:info.location.coordinates.latitude,
+                long:info.location.coordinates.longitude
+            },
+            timezone: info.location.timezone.description
+        }
+        return sunstuff(result)
+    }
+
+    function sunStuff(info){
+        $.get(`https://api.sunrise-sunset.org/json?lat=${info.location.lat}&lng=${info.location.long}` , data =>{
+            let output = {
+                firstName: info.firstName,
+                lastName: info.lastName,
+                timezone: info.timezone,
+                sunrise: data.results.sunrise,
+                sunset:data.results.sunset,
+            }
+            render(output)
+        })
+    }
+
+    function render(data){
+        $('textField').html(`
+            I am ${data.firstName} ${data.lastName},
+            I am in ${data.timezone},
+            Sunrise at ${data.sunrise},
+            Sunset at ${data.sunset}
+        `)
+    }
