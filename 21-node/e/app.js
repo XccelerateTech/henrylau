@@ -1,17 +1,21 @@
 let time = require('./timer.js')
 
 let timer = new time(12)
-
 timer.on('tick', time =>{
-    console.log(time);
+    if(time == 0){
+        console.log('kaboom');
+    }else{
+        console.log(`${time} second left`);
+    }
 })
+timer.emit('start')
 
 setTimeout(() => {
-    timer.stop();
+    timer.emit('stop');
 }, 9000);
 setTimeout(() => {
-    timer.start();
+    timer.emit('start');
 }, 5000);
 setTimeout(() => {
-    timer.pause();
+    timer.emit('pause');
 }, 3000)
