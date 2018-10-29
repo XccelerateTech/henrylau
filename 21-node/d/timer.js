@@ -4,24 +4,18 @@ class Timer extends Emitter{
     constructor(seconds){
         super();
         this.second = seconds;
-        this.running = true;
         this.count();
-        this.output;
     }
     count(){
-        let a = setInterval(()=>{
-            if (this.second < 1) {
-                this.running = false;
+        let interval = setInterval(todo, 1000)
+        let that = this
+        function todo(){
+            if(that.second == 0){
+                clearInterval(interval)
             }
-            if(this.running){
-                this.result = `${this.second} second left`
-                this.second--
-            }else{
-                this.result = 'kaboom'
-                clearInterval(a)
-            }
-            this.emit('tick', this.result);
-        }, 1000)
+            that.emit('tick', that.second)
+            that.second --
+        }
     }
 }
 module.exports = Timer

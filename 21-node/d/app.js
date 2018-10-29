@@ -1,7 +1,10 @@
 let time = require('./timer.js')
-
-let timer = new time(25)
-
+let timer = new time(15)
 timer.on('tick', time =>{
-    console.log(time);
+    if(time == 0){
+        console.log('kaboom');
+    }else{
+        console.log(`${time} second left`);
+        
+    }
 })
