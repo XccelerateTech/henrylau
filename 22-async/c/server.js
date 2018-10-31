@@ -2,10 +2,9 @@ const http = require('http')
 const fs = require('fs')
 
 http.createServer((req, res) => {
-    if (req.url === '/') {
-        fs.createReadStream(__dirname + '/web/flowerShop.html').pipe(res);
-    }else if(req.url){
-        fs.createReadStream(__dirname+'/web'+req.url).pipe(res)
+    let path = req.url === '/' ? '/flowerShop.html' : req.url;
+    if (req.url) {
+        fs.createReadStream(__dirname + '/web' + path).pipe(res);
     }else{
         res.writeHead(404);
         res.end();
