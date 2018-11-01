@@ -14,7 +14,7 @@ app.post('/login', (req, res)=>{
         <h1>Info Recieved</h1>
         <h2>Your Name : ${req.body.FuckingBeast}</h2>
         <h2>Your Password : ${req.body.littleShit}</h2>
-        <h2>Your file upload : ${req.files.suckMyDick.name}</h2>
+        <h2>Your photo upload : ${req.files.suckMyDick.name}</h2>
         <img src= "data:image/jpg;base64, ${image}">
         `)
     })
