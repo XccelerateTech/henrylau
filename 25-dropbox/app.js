@@ -17,11 +17,18 @@ app.get('/files/:name', (req, res) => {
     }).then(file => { res.send(file) })
 })
 app.post('/files', (req, res) => {
-    req.files.suckMyDick.mv(`./files/${req.files.suckMyDick.name}`)
-    res.send(`
-        <h1>Info Recieved</h1>
-        <h2>Your file upload : ${req.files.suckMyDick.name}</h2>
-    `)
+    if(req.files.suckMyDick !== undefined){
+        req.files.suckMyDick.mv(`./files/${req.files.suckMyDick.name}`)
+        res.send(`
+            <h1>Info Recieved</h1>
+            <h2>Your file upload : ${req.files.suckMyDick.name}</h2>
+        `)
+    }else{
+        res.send(`
+            <h1>Empty Upload is not allowed</h1>
+            <h1>You litte Piece of Shit !!!</h1>
+        `)
+    }
 })
 app.listen(8080)
 
