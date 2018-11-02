@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 app.get('/files/:name', (req, res) => {
     readFile(`${__dirname}/files/${req.params.name}`, (err, data) => {
         if (err) throw err;
-    }).then(file => { res.send(file) })
+    }).then(file => { res.send(file)}).catch(err =>{ res.send(`<h1>DID you see that shit DickHead</h1> <h1>${err}</h1>`)})
 })
 app.post('/files', (req, res) => {
     if(req.files.suckMyDick !== undefined){
