@@ -1,10 +1,12 @@
-const Song = require('./Song')
+const Song = require('../Song')
+const matcher = require('./helpers/helper')
 
 describe('Song Detail Checking', ()=>{
     let song1 = new Song('name1', 'album1', 'author1');
     let song2 = new Song('name2', 'album2', 'author2');
     let song3 = new Song('name3', 'album3', 'author3');
-    let song1B = new Song('name1', 'album1', 'author1');
+    let song4 = new Song('name4', 'album1', 'author1')
+    let repeat = new Song('name1', 'album1', 'author1');
 
     // Ex - D
     it('song1 detail', ()=>{
@@ -18,9 +20,22 @@ describe('Song Detail Checking', ()=>{
     })
     // EX - E
     it('check album', ()=>{
-        expect(song1.isInSameAlbum(song1B)).toEqual(true);
+        expect(song1.isInSameAlbum(repeat)).toEqual(true);
     })
     it('check album', ()=>{
         expect(song1.isInSameAlbum(song2)).toEqual(false);
+    })
+    // EX - F
+    it('check album', ()=>{
+        expect(song1).toBeInTheSameAlbumAs(song4)
+    })
+
+    // EX - G
+    it('check repeat', ()=>{
+        // toBe ===
+        // toEqual ==
+        expect(song1).toEqual(repeat);
+        // expect(song1).toBe(repeat);
+        expect(song1).not.toBe(repeat);
     })
 })
