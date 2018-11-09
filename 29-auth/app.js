@@ -3,8 +3,12 @@ const auth = require('express-basic-auth');
 const port = 8080;
 const USERS = [
     {
-        name: "henry",
+        name: "Henry",
         pwd: "123455"
+    },
+    {
+        name: "Jacky",
+        pwd: "554321"
     }
 ]
 
@@ -20,8 +24,9 @@ app.use(auth({
 }))
 
 app.get('/', (req, res)=>{
+    res.status(401)
     res.send('<h1>Welcome back My Lord</h1>')
 })
 app.listen(port, ()=>{
-    console.log(`web online on PORT${port}`);
+    console.log(`web online on PORT : ${port}`);
 })
