@@ -48,14 +48,17 @@ let operator = {
     'SELL' : '-'
 }
 let inputStream = fs.createReadStream('./transaction_record.csv', 'utf8');
-inputStream.pipe(csv({parseNumbers: true, paresBooleans: true, trim:true})).on('data', (row)=>{
+
+inputStream.pipe(csv({parseNumbers: true, paresBooleans: true, trim:true}))
+.on('data', (row)=>{
     csvFile.push(row)
-}).on('end', data=>{
+})
+.on('end', data=>{
     console.log('End of file');
     // console.log(operator[csvFile[0][0]]);
     csvFile.map(rule =>{
-        let command = `update citrus_stock set quantity\=quantity${operator[rule[0]]}${rule[2]} where name\=${rule[1]}`
-        // console.log(a);
+        let command = `update citrus_stock set quantity\=quantity${operator[rule[0]]}${rule[2]} where name\='${rule[1]}'`
+        // console.log(command);
         begin(()=>{
             client.query(command, (err, result)=>{
                 if(err){
