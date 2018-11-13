@@ -1,10 +1,10 @@
 const pg = require('pg');
-const pw = require('./pw.js');
+const hey = require('./noneOfYourBusinese.js');
 
 let config ={
-    user: 'henry',
+    user: hey.goAway,
     database: 'fruits',
-    password: pw,
+    password: hey.leaveMeAlone,
     host: 'localhost',
     port: 5432,
     max: 10,
