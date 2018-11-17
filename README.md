@@ -1,7 +1,8 @@
-<h1 align='center'>Henry Lau - Full - Stack SoftWare Engineer &#x1F64A</h1>
+<h1 align='center'>Henry Lau - A Full Stack SoftWare Engineer &#x1F64A</h1>
 <h3 align="center">XccelerateTech Immersive BootCamp in 16 Weeks</h3
 
-Courses will mainly be in three modules
+## Courses will mainly be in three modules
+
 |              |   Subject   | Duration |
 |:------------:|:-----------:|:--------:|
 |  Module One  | Front - End |  4 weeks |
