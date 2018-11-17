@@ -1,0 +1,42 @@
+mixin comment(detail, index)
+    - let i = index, memo = detail.memo
+    .memos.w3-container.w3-card.w3-white.w3-round.w3-margin(data-index=i)
+        .w3-container.w3-padding-small
+            i.fa.fa-user.w3-left.w3-margin-right(style='font-size:3em')
+            span.w3-right.w3-opacity #{detail.date}
+            h4 #{user}
+        hr.w3-clear.w3-topbar.w3-round.w3-border-lime(style='width:15%;')
+        input(type="text" value=memo style="width:50%").w3-input.w3-left.w3-border-0
+        .w3-right.w3-padding-small
+            //- button.update.w3-button.w3-theme-d1.w3-margin-right.w3-round-xxlarge(type='button'). 
+            //-     #[i.fa.fa-edit] &nbsp;Update
+            button.delete.w3-button.w3-theme-d2.w3-round-xxlarge(type='button'). 
+                #[i.fa.fa-trash] &nbsp;Delete
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="ie=edge")
+        title Memo
+        link(rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css")
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+        link(rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-w3schools.css")
+    body
+        .w3-row-padding.w3-margin-top
+            .w3-col.m12
+                .w3-card.w3-round.w3-white
+                    .w3-container.w3-padding
+                        h6.w3-opacity Write Something Down Below
+                        input(name='memo' type="text" style="width:50%").w3-input.w3-border.w3-padding.w3-border-0.w3-margin-bottom
+                        button#post.w3-button.w3-theme.w3-round-xxlarge(type='button'). 
+                            #[i.fa.fa-pencil] &nbsp;Post
+                        button#logout.w3-button.w3-right.w3-theme-d5.w3-round-xxlarge(type='button') Logout
+        //- block memo
+        #notes
+            each detail,index in content
+                + comment(detail, index)
+    script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous")
+    script(src="https://unpkg.com/axios/dist/axios.min.js" ) 
+    script(src='notes.js')
