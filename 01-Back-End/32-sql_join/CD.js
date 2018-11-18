@@ -1,7 +1,7 @@
 const pg = require('pg');
+const fs = require('fs')
 const hey = require('./noneOfYourBusinese.js');
 const csv = require('csv-reader')
-const fs = require('fs')
 
 let config ={
     user: hey.goAway,
@@ -57,13 +57,14 @@ inputStream.pipe(csv({parseNumbers: true, paresBooleans: true, trim:true}))
     console.log('End of file');
     // console.log(operator[csvFile[0][0]]);
     csvFile.map(rule =>{
-        let command = `update citrus_stock set quantity\=quantity${operator[rule[0]]}${rule[2]} where name\='${rule[1]}'`
-        // console.log(command);
+        // let join = `SELECT quantity FROM stock INNER JOIN citrus ON stock.citrus_id\=citrus.id`
+        // let command = `UPDATE stock SET quantity\=quantity${operator[rule[0]]}${rule[2]} FROM citrus WHERE stock.citrus_id\=citrus.id AND name\='${rule[1]}'`
+        let mixCommand = `UPDATE stock st SET quantity\=quantity${operator[rule[0]]}${rule[2]} FROM citrus ct WHERE st.citrus_id\=ct.id AND ct.name\='${rule[1]}'`
         begin(()=>{
-            client.query(command, (err, result)=>{
+            client.query(mixCommand, (err, result)=>{
                 if(err){
                     rollback(()=>{
-                        console.log('Transaction is rolled back!');
+                        console.log('Transaction is rolled back! '+err);
                     })
                 }else{
                     commit(()=>{
