@@ -1,7 +1,7 @@
 
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('bookings', table=>{
-        table.increments();
+        table.increments().primary();
         table.string('date');
         table.string('remark');
         table.timestamps(false, true);
