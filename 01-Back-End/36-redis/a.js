@@ -1,6 +1,7 @@
 const redis = require('redis')
 const axios = require('axios')
 const app = require('express')();
+const {promisify} = require('util');
 
 let client = redis.createClient()
 
@@ -9,54 +10,62 @@ client.on('error', err=>{
 })
 
 function readLatestBlock(limit = undefined){
-    let addToQueue = [];
+    let updatedBlockQueue = [];
     return new Promise((good, bad)=>{
         axios.get('https://blockchain.info/latestblock').then(res =>{
             res.data.txIndexes.slice(0, limit).map(target =>{
                 client.get(target, (err, res)=>{
                     if(err){return bad(err);}
                     if(res === null){
-                        addToQueue.push(target);
+                        updatedBlockQueue.push(target);
                     }else{
-                        client.expire(target, 3*60 , err=>{
-                            if(err){return bad(err);}
+                        updatedBlockQueue.push(target)
+                        client.expire(target, 3*60, err=>{
+                            if(err){console.log(err)}
                         })
                     }
-                    return good(addToQueue)
+                    client.set('latestBlock', JSON.stringify(updatedBlockQueue), err=>{
+                        if(err){console.log(err)}
+                    })
                 })
             })
+            return good()
         }).catch(err =>{
             return bad(err)
         })
     })
 }
 
-function extractHASH(input) {
+function blockDetail() {
     return new Promise((good, bad)=>{
-        input.map(dataIndex=>{
-            console.log(`Fetching the transaction detail ${dataIndex}`);
-            axios.get(`https://blockchain.info/rawtx/${dataIndex}`).then(hash=>{
-                client.setex(dataIndex, 3*60, JSON.stringify(hash.data), err=>{
-                    if(err){return bad(err)}
+        client.get('latestBlock', (err, res)=>{
+            if(err){console.log(err)}
+            JSON.parse(res).map(dataIndex=>{
+                console.log(`Fetching the transaction detail ${dataIndex}`);
+                axios.get(`https://blockchain.info/rawtx/${dataIndex}`).then(hash=>{
+                    client.setex(dataIndex, 3*60, JSON.stringify(hash.data), err=>{
+                        if(err){return bad(err)}
+                    })
                 })
-                return good(input)
             })
+            return good(JSON.parse(res))
         })
     })
 }
 
-
 app.get('/lastestBlock', (req, res)=>{
-    readLatestBlock(10)
-    .then(data => extractHASH(data))
+    readLatestBlock(20)
+    .then(() => blockDetail())
     .then(index => {
-        index.map(dataNUM =>{
-            client.get(dataNUM, (err, reply)=>{
-                console.log(JSON.parse(reply));
+        let output = []
+        index.map(indexDetail=>{
+            client.get(indexDetail, (err, reply)=>{
+                if(err){console.log(err)}
+                output.push(JSON.parse(reply).hash);
             })
         })
+        setTimeout(()=>{res.json(output)},500)
     })
-    res.send('ok')
 })
 
 app.listen(8080, ()=>{
